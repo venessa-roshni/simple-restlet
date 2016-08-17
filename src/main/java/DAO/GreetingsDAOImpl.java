@@ -36,7 +36,7 @@ public class GreetingsDAOImpl implements GreetingsDAO{
 	             response.setPrimary_key(rs.getInt(1));
 	         } 
 			 
-			 response.setResponse(greeting.getGreeting());
+			 response.setResponse("world");
 	         rs.close();
 	         
 		} catch (SQLException e1) {
