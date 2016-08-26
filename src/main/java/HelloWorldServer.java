@@ -14,7 +14,21 @@ public class HelloWorldServer extends ServerResource{
 	@Post("json")
 		public Representation represent(Representation requestJson) {
 		GreetingsDTO greeting = new GreetingsDTO();
-		greeting.setGreeting("hello");
+		JsonRepresentation represent;
+		JSONObject jsonobject =null;
+		try {
+			represent = new JsonRepresentation(requestJson);
+			jsonobject = represent.getJsonObject();
+			greeting.setGreeting((String) jsonobject.get("greeting"));
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} catch (JSONException e) {
+			
+			e.printStackTrace();
+		}
+        		
 		greetingsDAO= new GreetingsDAOImpl();
 		GreetingsReponse response= greetingsDAO.insertRow(greeting);
 		Representation result = null;
